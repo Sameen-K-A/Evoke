@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'FontForP';
+  src: url('../public/fonts/Montserrat-VariableFont_wght.ttf') format('woff2');
+}
+
+@font-face {
+  font-family: 'FontForH';
+  src: url('../public/fonts/Poppins-Bold.ttf') format('woff2');
+}
+
+@font-face {
+  font-family: 'FontForLogo';
+  src: url('../public/fonts/mangro.otf') format('woff2');
+}
+
+@layer base {
+  p {
+    @apply font-p;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-h;
+  }
+
+  td {
+    @apply font-p;
+  }
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #c2c2c2;
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(86, 92, 103);
+  ;
+  border-radius: 50px;
+}
