@@ -1,4 +1,4 @@
-import { ImageLibraryProps, File } from "../../../interfaces/Icollections";
+import { ImageLibraryProps, IFile } from "../../../interfaces/Icollections";
 import ImagePreview from "../ImagePreview";
 import useImageHandler from "@/hooks/ImageHandler";
 
@@ -13,7 +13,7 @@ const GridCollection: React.FC<ImageLibraryProps> = ({ files }) => {
     }
     groups[date].push(file);
     return groups;
-  }, {} as Record<string, File[]>);
+  }, {} as Record<string, IFile[]>);
 
   return (
     <div>
@@ -21,7 +21,7 @@ const GridCollection: React.FC<ImageLibraryProps> = ({ files }) => {
         <div key={date}>
           <p className="text-medium text-white mt-4 mb-2">{date}</p>
           <div className="flex gap-4 flex-wrap">
-            {groupedFiles[date].map((file: File, index) => (
+            {groupedFiles[date].map((file: IFile, index) => (
               <div
                 key={file.id}
                 className="rounded overflow-hidden flex flex-col items-center"

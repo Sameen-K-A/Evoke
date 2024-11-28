@@ -1,7 +1,7 @@
-import { File } from "@/interfaces/Icollections"
+import { IFile } from "@/interfaces/Icollections"
 
 interface IimgagePropertyModalProps {
-   selectedImage: { image: File, index: number }
+   selectedImage: { image: IFile, index: number }
 }
 
 const ImagePropertyModal: React.FC<IimgagePropertyModalProps> = ({ selectedImage }) => {

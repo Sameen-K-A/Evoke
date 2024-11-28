@@ -6,11 +6,22 @@ import ModifyImage from "./ModifyImage";
 import { useTheme } from "@/context/ThemeContext";
 
 function ImageUploader({ onClose }: { onClose: () => void }) {
-   const { files, inputRef, selectedImage, selectedImageRef, handleFileChange, handleUploadClick, handleRemoveFile, handleSelectedImageClick, handleCloseSelectedImage } = useUploadImageHandler();
+   const {
+      files,
+      inputRef,
+      selectedImage,
+      selectedImageRef,
+      handleFileChange,
+      handleUploadClick,
+      handleRemoveFile,
+      handleSelectedImageClick,
+      handleCloseSelectedImage,
+      saveModificationOfSelectedImage
+   } = useUploadImageHandler();
    const { theme } = useTheme();
 
    return (
-      <div className={`fixed inset-0 flex items-center justify-center ${theme === "dark" ? "bg-black/50" : "bg-white/50"} backdrop-blur-md`}>
+      <div className={`fixed inset-0 flex items-center justify-center ${theme === "dark" ? "bg-black/50" : "bg-white/50"} backdrop-blur-md mt-7`}>
          <div className={`relative w-full max-w-2xl mx-auto max-h-[80vh] p-6 ${theme === "dark" ? "bg-black" : "bg-white"} rounded-lg overflow-y-auto border-1 border-orange-900`}>
 
             <Button onClick={onClose} className="absolute top-1 right-1 bg-transparent p-2 hover:bg-red-700 transition-colors" size="sm">
@@ -60,7 +71,17 @@ function ImageUploader({ onClose }: { onClose: () => void }) {
                   selectedImage={selectedImage}
                   selectedImageRef={selectedImageRef}
                   handleCloseSelectedImage={handleCloseSelectedImage}
+                  saveModificationOfSelectedImage={saveModificationOfSelectedImage}
                />
+            )}
+            {(!selectedImage && files.length > 0) && (
+               <div className="flex gap-2 justify-end mt-3">
+                  <Button variant="bordered">Cancel</Button>
+                  <Button
+                     className="bg-orange-500"
+                     onClick={onClose}
+                  >Upload</Button>
+               </div>
             )}
          </div>
       </div>

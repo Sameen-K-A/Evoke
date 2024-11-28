@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { File } from "@/interfaces/Icollections";
+import { IFile } from "@/interfaces/Icollections";
 
-const useImageHandler = (files: File[]) => {
-   const [selectedImage, setSelectedImage] = useState<{ image: File, index: number } | null>(null);
+const useImageHandler = (files: IFile[]) => {
+   const [selectedImage, setSelectedImage] = useState<{ image: IFile, index: number } | null>(null);
 
    const handleImageClick = (index: number) => {
       setSelectedImage({ image: files[index], index: index })

@@ -1,6 +1,6 @@
-import { File } from "@/interfaces/Icollections";
+import { IFile } from "@/interfaces/Icollections";
 
-const files: File[] = [
+const files: IFile[] = [
    { id: "1", name: "portrait.jpg", path: "https://img.freepik.com/free-photo/portrait-handsome-young-man-with-black-hair-smiling-looking-camera_1150-15009.jpg", uploadDate: "2024-11-23", uploadTime: "10:30 AM", size: "100 KB" },
    { id: "2", name: "sports-car.jpg", path: "https://img.freepik.com/free-photo/red-sports-car_144627-35461.jpg", uploadDate: "2024-11-23", uploadTime: "11:00 AM", size: "250 KB" },
    { id: "4", name: "city.jpg", path: "https://img.freepik.com/free-photo/modern-cityscape-night-scene_1150-16917.jpg", uploadDate: "2024-11-23", uploadTime: "12:00 PM", size: "300 KB" },

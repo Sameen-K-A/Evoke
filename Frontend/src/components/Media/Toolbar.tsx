@@ -1,11 +1,11 @@
 import { Tooltip } from "@nextui-org/react";
 import { IoCropOutline } from "react-icons/io5";
 import { AiOutlineDelete } from "react-icons/ai";
-import { File } from "@/interfaces/Icollections";
+import { IFile } from "@/interfaces/Icollections";
 import { useTheme } from "@/context/ThemeContext";
 
 interface IImageToolbarProps {
-   selectedImage: { image: File; index: number };
+   selectedImage: { image: IFile; index: number };
    onDelete: (index: number) => void;
 }
 

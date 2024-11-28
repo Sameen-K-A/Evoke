@@ -5,7 +5,7 @@ export interface MediaHeaderProps {
 
 export interface MediaImageLibraryProps extends Omit<MediaHeaderProps, "setView"> { }
 
-export interface File {
+export interface IFile {
    id: string;
    name: string;
    path: string;
@@ -15,13 +15,20 @@ export interface File {
 }
 
 export interface ImageLibraryProps {
-   files: File[];
+   files: IFile[];
 }
 
 export interface ImagePreviewProps {
-   selectedImage: { image: File, index: number }
+   selectedImage: { image: IFile, index: number }
    onClose: () => void;
    onNext: () => void;
    onPrev: () => void;
    onDelete: (index: number) => void
+}
+
+export interface IModifyImageProps {
+   selectedImage: File;
+   selectedImageRef: React.RefObject<HTMLDivElement>;
+   handleCloseSelectedImage: () => void;
+   saveModificationOfSelectedImage: (selectedImageName: string) => void;
 }

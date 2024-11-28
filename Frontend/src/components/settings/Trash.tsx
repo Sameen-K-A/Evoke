@@ -1,10 +1,10 @@
 import files from "@/constants/sampleImageFile";
 import { useTheme } from "@/context/ThemeContext";
-import { File } from "@/interfaces/Icollections";
+import { IFile } from "@/interfaces/Icollections";
 
 const Trash = () => {
 
-   const justSample: File[] = files.slice(0, 9);
+   const justSample: IFile[] = files.slice(0, 9);
    const { theme } = useTheme();
 
    return (
@@ -13,7 +13,7 @@ const Trash = () => {
             <h2 className="text-2xl font-semibold tracking-tight font-p">Recently deleted</h2>
          </div>
          <div className="flex flex-wrap gap-4 justify-center">
-            {justSample.map((file: File) => (
+            {justSample.map((file: IFile) => (
                <div
                   key={file.id}
                   className="rounded overflow-hidden flex flex-col items-center">
