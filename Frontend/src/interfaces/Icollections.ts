@@ -32,3 +32,11 @@ export interface IModifyImageProps {
    handleCloseSelectedImage: () => void;
    saveModificationOfSelectedImage: (selectedImageName: string) => void;
 }
+
+export interface IUser {
+   userid?: string;
+   name: string;
+   email: string;
+   password?: string;
+   createdAt: string;
+};

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { File, ImageLibraryProps } from "@/interfaces/Icollections";
+import { IFile, ImageLibraryProps } from "@/interfaces/Icollections";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { BiDialpadAlt } from "react-icons/bi";
 import useImageHandler from "@/hooks/ImageHandler";
@@ -34,7 +34,7 @@ const TableCollections: React.FC<ImageLibraryProps> = ({ files }) => {
                   {(provided: any) => (
                      <tbody className="text-sm" ref={provided.innerRef}   {...provided.droppableProps}>
 
-                        {imageFiles.map((file: File, index: number) => (
+                        {imageFiles.map((file: IFile, index: number) => (
                            <Draggable key={file.id} draggableId={file.id} index={index}>
                               {(provided: any) => (
                                  <tr

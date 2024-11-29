@@ -7,12 +7,10 @@ import { FcGoogle } from "react-icons/fc";
 import AuthHandler from '@/hooks/authHandler';
 
 const SignInForm: React.FC = () => {
-   const [email, setEmail] = useState('');
-   const [password, setPassword] = useState('');
    const [showPassword, setShowPassword] = useState(false);
    const { theme } = useTheme();
    const navigate = useNavigate();
-   const { login } = AuthHandler();
+   const { login, email, setEmail, password, setPassword, isLoading } = AuthHandler();
 
    return (
       <div className="min-h-screen flex items-center justify-center p-4 mt-8">
@@ -41,9 +39,7 @@ const SignInForm: React.FC = () => {
                </div>
 
                <div>
-                  <label htmlFor="password" className="block text-sm font-medium text-gray-300">
-                     Password
-                  </label>
+                  <label htmlFor="password" className="block text-sm font-medium text-gray-300">Password</label>
                   <div className="mt-1 relative">
                      <Input
                         variant='underlined'
@@ -65,21 +61,18 @@ const SignInForm: React.FC = () => {
                </div>
 
                <div className="flex items-center justify-end">
-                  <p className="text-sm text-blue-400 hover:underline">
-                     Forgot password?
-                  </p>
+                  <p className="text-sm text-blue-400 hover:underline">Forgot password?</p>
                </div>
 
                <Button
                   className="w-full flex justify-center py-2 px-4 border border-transparent font-medium text-white bg-orange-500"
                   onClick={login}
                >
-                  Get Started
+                  {isLoading ? "Loading . . ." : "Get Start"}
                </Button>
                <Button
                   variant='bordered'
                   fullWidth
-                  onClick={login}
                >
                   <FcGoogle /> Login with google
                </Button>

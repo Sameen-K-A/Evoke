@@ -1,17 +1,34 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { IUser } from "@/interfaces/Icollections";
+import { decryptData } from "@/utils/decrypt";
+import { createContext, useContext, useState, ReactNode, useEffect } from "react";
 
 type AuthContextType = {
-   isAuth: boolean;
-   setIsAuth: (value: boolean) => void;
+   userData: IUser | null;
+   setUserData: (value: IUser | null) => void;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-   const [isAuth, setIsAuth] = useState<boolean>(() => localStorage.getItem("EvokeAuth") === "true");
+   const [userData, setUserData] = useState<IUser | null>(null);
+
+   useEffect(() => {
+      const localUserData = localStorage.getItem("EvokeUserData");
+      if (localUserData) {
+         try {
+            const result = decryptData(localUserData);
+            setUserData(result as IUser);
+         } catch (error) {
+            console.error("Failed to decrypt user data:", error);
+            setUserData(null);
+         }
+      } else {
+         setUserData(null);
+      }
+   }, []);
 
    return (
-      <AuthContext.Provider value={{ isAuth, setIsAuth }}>
+      <AuthContext.Provider value={{ userData, setUserData }}>
          {children}
       </AuthContext.Provider>
    );

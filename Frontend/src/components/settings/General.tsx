@@ -1,9 +1,11 @@
+import { useAuth } from "@/context/AuthContext";
 import { Button } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 
 const General = () => {
 
    const navigate = useNavigate();
+   const { userData } = useAuth();
 
    return (
       <div className="max-w-2xl mx-auto mt-12">
@@ -17,17 +19,17 @@ const General = () => {
 
             <div className="space-y-1">
                <label className="block text-sm font-medium text-gray-700">Full name</label>
-               <p>Sameen K A</p>
+               <p>{userData?.name}</p>
             </div>
 
             <div className="space-y-1">
                <label className="block text-sm font-medium text-gray-700">Email</label>
-               <p>sameensameen60@gmail.com</p>
+               <p>{userData?.email}</p>
             </div>
 
             <div className="space-y-1">
                <label className="block text-sm font-medium text-gray-700">Account started</label>
-               <p>2024-11-25</p>
+               <p>{userData?.createdAt}</p>
             </div>
 
             <div className="space-y-1">
