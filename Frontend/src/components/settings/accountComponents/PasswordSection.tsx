@@ -2,7 +2,14 @@ import { useState } from 'react'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { Input } from '@nextui-org/react'
 
-const PasswordSection = () => {
+interface IPasswordSectionProps {
+   currentPassword: string;
+   setCurrentPassword: React.Dispatch<React.SetStateAction<string>>;
+   newPassword: string;
+   setNewPassword: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const PasswordSection: React.FC<IPasswordSectionProps> = ({ currentPassword, setCurrentPassword, newPassword, setNewPassword }) => {
 
    const [showCurrentPassword, setShowCurrentPassword] = useState(false)
    const [showNewPassword, setShowNewPassword] = useState(false)
@@ -19,7 +26,8 @@ const PasswordSection = () => {
                <div className="relative">
                   <Input
                      type={showCurrentPassword ? "text" : "password"}
-                     defaultValue="12345678"
+                     value={currentPassword}
+                     onChange={(e) => setCurrentPassword(e.target.value)}
                      endContent={showCurrentPassword ? (
                         <FaEyeSlash className='cursor-pointer' onClick={() => setShowCurrentPassword(!showCurrentPassword)} />
                      ) : (
@@ -33,7 +41,9 @@ const PasswordSection = () => {
                <div className="relative">
                   <Input
                      type={showNewPassword ? "text" : "password"}
-                     defaultValue="123445678" endContent={showNewPassword ? (
+                     value={newPassword}
+                     onChange={(e) => setNewPassword(e.target.value)}
+                     endContent={showNewPassword ? (
                         <FaEyeSlash className='cursor-pointer' onClick={() => setShowNewPassword(!showNewPassword)} />
                      ) : (
                         <FaEye className='cursor-pointer' onClick={() => setShowNewPassword(!showNewPassword)} />

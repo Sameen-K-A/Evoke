@@ -64,18 +64,20 @@ const SignInForm: React.FC = () => {
                   <p className="text-sm text-blue-400 hover:underline">Forgot password?</p>
                </div>
 
-               <Button
-                  className="w-full flex justify-center py-2 px-4 border border-transparent font-medium text-white bg-orange-500"
-                  onClick={login}
-               >
-                  {isLoading ? "Loading . . ." : "Get Start"}
-               </Button>
-               <Button
-                  variant='bordered'
-                  fullWidth
-               >
-                  <FcGoogle /> Login with google
-               </Button>
+               <div className='space-y-2'>
+                  <Button
+                     className="w-full flex justify-center py-2 px-4 border border-transparent font-medium text-white bg-orange-500"
+                     onClick={login}
+                  >
+                     {isLoading ? "Loading . . ." : "Get Start"}
+                  </Button>
+                  <Button
+                     variant='bordered'
+                     fullWidth
+                  >
+                     <FcGoogle /> Login with google
+                  </Button>
+               </div>
 
                <p className="text-sm text-center">
                   Don't have an account? <span className='font-p hover:underline text-blue-400' onClick={() => navigate("/auth/register")}>Sign up</span>

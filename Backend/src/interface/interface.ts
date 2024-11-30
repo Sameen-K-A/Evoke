@@ -4,7 +4,8 @@ export interface ICustomError extends Error {
 
 export interface IUser {
    userid?: string;
-   name: string;
+   firstName: string;
+   lastName?: string;
    email: string;
    password?: string;
    createdAt: string;

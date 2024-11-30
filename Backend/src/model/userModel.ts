@@ -10,8 +10,12 @@ const userSchema: Schema = new Schema<IUser>({
       type: String,
       unique: true
    },
-   name: {
+   firstName: {
       type: String
+   },
+   lastName: {
+      type: String,
+      default: ""
    },
    password: {
       type: String

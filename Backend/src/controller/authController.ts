@@ -75,7 +75,7 @@ class AuthController {
 
          const today = new Date();
          const userDetails: IUser = {
-            name,
+            firstName: name,
             email,
             userid: uuid(),
             password: await hashPassword(password),

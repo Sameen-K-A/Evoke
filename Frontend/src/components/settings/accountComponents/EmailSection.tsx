@@ -1,7 +1,11 @@
 import { FaEnvelope } from "react-icons/fa"
 import { Input } from "@nextui-org/react";
+import { useAuth } from "@/context/AuthContext";
 
 const EmailSection = () => {
+
+   const { userData } = useAuth();
+
    return (
       <div className="space-y-4">
          <h3 className="text-medium font-semibold tracking-tight font-p">Contact email</h3>
@@ -12,7 +16,7 @@ const EmailSection = () => {
                <Input
                   type="email"
                   startContent={<FaEnvelope className="me-2" />}
-                  defaultValue="annan.gmail.com"
+                  value={userData?.email}
                   readOnly
                />
             </div>

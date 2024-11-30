@@ -31,11 +31,12 @@ export interface IModifyImageProps {
    selectedImageRef: React.RefObject<HTMLDivElement>;
    handleCloseSelectedImage: () => void;
    saveModificationOfSelectedImage: (selectedImageName: string) => void;
-}
+};
 
 export interface IUser {
    userid?: string;
-   name: string;
+   firstName: string;
+   lastName?: string;
    email: string;
    password?: string;
    createdAt: string;

@@ -19,7 +19,7 @@ const General = () => {
 
             <div className="space-y-1">
                <label className="block text-sm font-medium text-gray-700">Full name</label>
-               <p>{userData?.name}</p>
+               <p>{userData?.firstName} {userData?.lastName}</p>
             </div>
 
             <div className="space-y-1">
