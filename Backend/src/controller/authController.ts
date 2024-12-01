@@ -6,13 +6,14 @@ import UserRepository from "../repository/repository";
 import { v4 as uuid } from "uuid";
 import { loginValidation, registerValidation } from "../utils/validation";
 import encryptData from "../utils/encryption";
+import { createAccessToken, createRefreshToken } from "../utils/jwt";
 
 
 const userRepository = new UserRepository();
 
 class AuthController {
 
-   async login(req: Request, res: Response, next: NextFunction) {
+   public async login(req: Request, res: Response, next: NextFunction) {
       try {
          const { email, password } = req.body;
          const loginValidationResult: object = loginValidation(email, password);
@@ -37,8 +38,10 @@ class AuthController {
                message: "Invalid password.",
                status: httpStatusCode.Unauthorized
             };
-         }
-         
+         };
+
+         this.cookieHandler(res, userDetails.userid || "");
+
          userDetails.userid = "";
          userDetails.password = "";
          const encryptedUserDetails = encryptData(userDetails);
@@ -53,7 +56,7 @@ class AuthController {
       }
    }
 
-   async register(req: Request, res: Response, next: NextFunction) {
+   public async register(req: Request, res: Response, next: NextFunction) {
       try {
 
          const { name, email, password, confirmPassword } = req.body;
@@ -89,7 +92,24 @@ class AuthController {
       } catch (error) {
          next(error);
       }
-   }
+   };
+
+   private async cookieHandler(res: Response, userid: string) {
+      const accessToken: string = createAccessToken(userid);
+      const refreshToken: string = createRefreshToken(userid);
+
+      res.cookie("AccessToken", accessToken, {
+         httpOnly: true,
+         sameSite: 'none',
+         maxAge: 15 * 60 * 1000,
+      });
+
+      res.cookie("RefreshToken", refreshToken, {
+         httpOnly: true,
+         sameSite: 'none',
+         maxAge: 7 * 24 * 60 * 60 * 1000
+      });
+   };
 
 };
 
