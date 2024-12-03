@@ -2,42 +2,32 @@ import { useAuth } from "@/context/AuthContext";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import axios from "axios";
 import { decryptData } from "@/utils/decrypt";
 import { IUser } from "@/interfaces/Icollections";
+import axios from "axios";
+import useValidationHandler from "./validationHandler";
 
 const AuthHandler = () => {
    const [email, setEmail] = useState<string>("");
    const [password, setPassword] = useState<string>("");
    const [isLoading, setIsLoading] = useState<boolean>(false);
    const { setUserData } = useAuth();
+   const { loginValidation } = useValidationHandler();
    const navigate = useNavigate();
 
-   const login = async () => {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!email || !emailRegex.test(email)) {
-         toast.warning("Valid email required.");
-         return;
-      }
+   //! ==================================================== Handle manual login ======================================================
 
-      if (!password || password.length < 8 || password.length > 25) {
-         toast.warning("Password must be between 8 and 25 characters.");
-         return;
-      }
+   const login = async () => {
+      if (!loginValidation(email, password)) return;
 
       try {
          setIsLoading(true);
          const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/login`, {
             email: email,
             password: password,
-         });
+         }, { withCredentials: true });
 
-         const encryptedUserDetails = response.data.userDetails;
-         const decryptedUserData = decryptData(encryptedUserDetails);
-
-         setUserData(decryptedUserData as IUser);
-         localStorage.setItem("EvokeUserData", encryptedUserDetails);
-
+         handleUserData(response.data.userDetails);
          toast.success("Login successfully.");
       } catch (error: any) {
          toast.error(error.response?.data?.message || "Something went wrong, please try again later.");
@@ -46,12 +36,40 @@ const AuthHandler = () => {
       }
    };
 
+   //! ==================================================== Handle google login ======================================================
+
+   const handleGoogleLogin = async (credential: string | undefined): Promise<void> => {
+      try {
+         const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/google/auth`,
+            { token: credential },
+            { withCredentials: true }
+         );
+
+         handleUserData(response.data.userDetails as string);
+         toast.success("Login successfully.");
+      } catch (error: any) {
+         toast.error(error.response?.data?.message || "Something went wrong, please try again later.");
+      };
+   };
+
+   //! ==================================================== Handle logout ===========================================================
+
    const logout = () => {
       setUserData(null);
       localStorage.removeItem("EvokeUserData");
       navigate("/auth/login");
    };
 
+   //! ============================================= handle recieved user details from backend ======================================
+
+   const handleUserData = (userData: string) => {
+      const decryptedUserData = decryptData(userData);
+      setUserData(decryptedUserData as IUser);
+      localStorage.setItem("EvokeUserData", userData);
+   };
+
+   //! ======================================================== Returning ===========================================================
+   
    return {
       email,
       setEmail,
@@ -59,6 +77,7 @@ const AuthHandler = () => {
       setPassword,
       isLoading,
       login,
+      handleGoogleLogin,
       logout,
    };
 };

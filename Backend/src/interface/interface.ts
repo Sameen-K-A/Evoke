@@ -3,7 +3,7 @@ export interface ICustomError extends Error {
 };
 
 export interface IUser {
-   userid?: string;
+   userid: string;
    firstName: string;
    lastName?: string;
    email: string;

@@ -36,7 +36,7 @@ export interface IModifyImageProps {
 export interface IUser {
    userid?: string;
    firstName: string;
-   lastName?: string;
+   lastName: string;
    email: string;
    password?: string;
    createdAt: string;

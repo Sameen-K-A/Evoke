@@ -105,16 +105,18 @@ const RegisterForm: React.FC = () => {
                   </div>
                </div>
 
-               <Button className="w-full flex justify-center py-2 px-4 border border-transparent font-medium text-white bg-orange-500" onClick={() => navigate("/auth/otp")}>
-                  Register
-               </Button>
+               <div className='space-y-2'>
+                  <Button className="w-full flex justify-center py-2 px-4 border border-transparent font-medium text-white bg-orange-500" onClick={() => navigate("/auth/otp")}>
+                     Register
+                  </Button>
 
-               <Button
-                  fullWidth
-                  variant='bordered'
-                  onClick={() => navigate("/auth/otp")}>
-                  <FcGoogle /> Register with google
-               </Button>
+                  <Button
+                     fullWidth
+                     variant='bordered'
+                     onClick={() => navigate("/auth/otp")}>
+                     <FcGoogle /> Register with google
+                  </Button>
+               </div>
 
                <p className="text-sm text-center">
                   Already have an account? <span className='font-p hover:underline text-blue-400' onClick={() => navigate("/auth/login")}>Sign in</span>

@@ -3,7 +3,7 @@ import { ICustomError } from "../interface/interface";
 import httpStatusCode from "../enum/statusCode";
 import logger from "../utils/winston";
 
-function errorHandler(error: ICustomError, req: Request, res: Response, next: NextFunction) {
+function errorHandler(error: ICustomError, req: Request, res: Response, next: NextFunction): void {
 
    const today = new Date();
    const logDetails = {

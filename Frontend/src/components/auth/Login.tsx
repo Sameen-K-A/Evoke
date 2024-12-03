@@ -3,14 +3,14 @@ import { FiLogIn, FiEye, FiEyeOff } from 'react-icons/fi';
 import { Button, Input } from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@/context/ThemeContext';
-import { FcGoogle } from "react-icons/fc";
 import AuthHandler from '@/hooks/authHandler';
+import { CredentialResponse, GoogleLogin } from "@react-oauth/google"
 
 const SignInForm: React.FC = () => {
    const [showPassword, setShowPassword] = useState(false);
    const { theme } = useTheme();
    const navigate = useNavigate();
-   const { login, email, setEmail, password, setPassword, isLoading } = AuthHandler();
+   const { login, email, setEmail, password, setPassword, isLoading, handleGoogleLogin } = AuthHandler();
 
    return (
       <div className="min-h-screen flex items-center justify-center p-4 mt-8">
@@ -71,12 +71,10 @@ const SignInForm: React.FC = () => {
                   >
                      {isLoading ? "Loading . . ." : "Get Start"}
                   </Button>
-                  <Button
-                     variant='bordered'
-                     fullWidth
-                  >
-                     <FcGoogle /> Login with google
-                  </Button>
+                  
+                  <GoogleLogin onSuccess={(response: CredentialResponse) => {
+                     handleGoogleLogin(response.credential)
+                  }} />
                </div>
 
                <p className="text-sm text-center">
